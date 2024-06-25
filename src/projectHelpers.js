@@ -12,8 +12,8 @@ function createProject(newProject) {
 function DeleteProject(currentProject) {
     const Projects = JSON.parse(localStorage.getItem('Projects'));
 
-    // Find the index of the task to delete using day created 
-    const projectIndex = Projects.findIndex(project => project.createdDate === currentProject.createdDate);
+    // Find the index of the task to delete using id 
+    const projectIndex = Projects.findIndex(project => project.id === currentProject.id);
 
     // Check if the task exists in the array
     if (projectIndex !== -1) {
@@ -27,6 +27,7 @@ function DeleteProject(currentProject) {
     }
 }
 
+// get the tasks through the date/time created
 function GetProjectsTasks(Project) {
     const Tasks = JSON.parse(localStorage.getItem('Tasks'));
 
@@ -34,7 +35,7 @@ function GetProjectsTasks(Project) {
 
     // iterate over tasks
     for (let i = 0; i < Tasks.length; i++) {
-        if (Tasks[i].project === Project.title) {
+        if (Tasks[i].project === Project.id) {
             projectTasks.push(Tasks[i]);
         }
     }
@@ -42,11 +43,11 @@ function GetProjectsTasks(Project) {
 }
 
 // edit a Project, takes new object from form
-function EditProject(currentProject, newProject){
+function EditProject(currentProject, newProject) {
     const Projects = JSON.parse(localStorage.getItem('Projects'));
 
     // Find the index of the Project to update using day and time created 
-    const ProjectIndex = Projects.findIndex(Project => Project.createdDate === currentProject.createdDate);
+    const ProjectIndex = Projects.findIndex(Project => Project.id === currentProject.id);
 
     // Check if the Project exists in the array
     if (ProjectIndex !== -1) {
@@ -59,4 +60,26 @@ function EditProject(currentProject, newProject){
         console.error('Project does not exist')
     }
 }
-export { createProject, DeleteProject, GetProjectsTasks, EditProject }
+
+// check if project is completed, takes project object
+function completedProject(project) {
+    const projectTasks = GetProjectsTasks(project);
+
+    let checker = 0;
+    // iterate over tasks checking if all task are complete
+    for (let i = 0; i < projectTasks.length; i++) {
+        if (projectTasks[i].completed === false) {
+            return console.log("project not completed yet")
+        } else {
+            checker++;
+        }
+    }
+    // check to make sure the checker counter matches the length of the array.
+    if (projectTasks.length === checker) {
+        EditProject(project, { completed: true })
+        return console.log("project Completed!")
+    } else {
+        return console.log("project not completed yet")
+    }
+}
+export { createProject, DeleteProject, GetProjectsTasks, EditProject, completedProject }

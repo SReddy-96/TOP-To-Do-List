@@ -1,3 +1,4 @@
+import { isToday, isThisWeek  } from "date-fns";
 
 // create a task
 function createTask(newTask) {
@@ -13,7 +14,7 @@ function DeleteTask(currentTask) {
     const Tasks = JSON.parse(localStorage.getItem('Tasks'));
 
     // Find the index of the task to delete using day created 
-    const taskIndex = Tasks.findIndex(task => task.createdDate === currentTask.createdDate);
+    const taskIndex = Tasks.findIndex(task => task.id === currentTask.id);
 
     // Check if the task exists in the array
     if (taskIndex !== -1) {
@@ -27,12 +28,12 @@ function DeleteTask(currentTask) {
     }
 }
 
-// edit a Task, takes new object from form
-function EditTask(currentTask, newTask){
+// edit a Task, takes new object from form, change completed to true
+function EditTask(currentTask, newTask) {
     const Tasks = JSON.parse(localStorage.getItem('Tasks'));
 
     // Find the index of the task to update using day and time created 
-    const taskIndex = Tasks.findIndex(task => task.createdDate === currentTask.createdDate);
+    const taskIndex = Tasks.findIndex(task => task.id === currentTask.id);
 
     // Check if the task exists in the array
     if (taskIndex !== -1) {
@@ -46,6 +47,60 @@ function EditTask(currentTask, newTask){
     }
 }
 
-// change completed to true
+// get the project that the task is in
+function getTasksProject(currentTask) {
+    const Projects = JSON.parse(localStorage.getItem('Projects'));
 
-export { createTask, DeleteTask, EditTask }
+    // Find the index of the Project to update using day and time created 
+    const ProjectIndex = Projects.findIndex(Project => Project.id === currentTask.project);
+
+    if (ProjectIndex !== -1) {
+        // return project object for task 
+        return Projects[ProjectIndex];
+    } else {
+        console.error('Project does not exist')
+    }
+}
+
+// get all the tasks need for today
+function TodaysTasks() {
+    const Tasks = JSON.parse(localStorage.getItem('Tasks'));
+
+    const TasksForToday = [];
+
+    // iterate over and if the date matches todays then add to array
+    for (let i = 0; i < Tasks.length; i++) {
+        if (isToday(Tasks[i].dueDate) === true) {
+            TasksForToday.push(Tasks[i]);
+        }
+    }
+    
+    // check if array is empty
+    if (TasksForToday.length === 0) {
+        return "No tasks for today"
+    }
+    return TasksForToday;
+
+}
+
+// check for the tasks in this week
+function WeeksTasks(){
+    const Tasks = JSON.parse(localStorage.getItem('Tasks'));
+
+    const TasksForTheWeek = [];
+
+    // iterate over and if the date matches todays then add to array
+    for (let i = 0; i < Tasks.length; i++) {
+        if (isThisWeek (Tasks[i].dueDate) === true) {
+            TasksForTheWeek.push(Tasks[i]);
+        }
+    }
+    
+    // check if array is empty
+    if (TasksForTheWeek.length === 0) {
+        return "No tasks for This Week"
+    }
+    return TasksForTheWeek;
+}
+
+export { createTask, DeleteTask, EditTask, getTasksProject, TodaysTasks, WeeksTasks }

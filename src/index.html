@@ -12,6 +12,40 @@
     <div id="content">
 
     </div>
+
+    <!-- Task form -->
+    <dialog open>
+        <form action="">
+            <label for="title">Title</label>
+            <input type="text" id="title">
+
+            <label for="description">description</label>
+            <input type="text" id="description">
+
+            <label for="priority">priority</label>
+            <select name="priority" id="priority">
+                <option disabled>--Choose a Priority--</option>
+                <option value="Urgent">Urgent</option>
+                <option value="Important">Important</option>
+                <option value="LowPriority">Low Priority</option>
+            </select>
+
+            <label for="dueDate">Due Date</label>
+            <input type="date" name="dueDate" id="dueDate">
+
+            <!-- leave select empty to fill when the dialog is active -->
+            <label for="ProjectSelect">Project</label>
+            <select name="project" id="ProjectSelect">
+                <option disabled selected>--Choose a Project--</option>
+            </select>
+
+            <label for="notes">Notes</label>
+            <textarea name="notes" id="notes" cols="30" rows="10"></textarea>
+
+            <input type="button" value="submit">
+        </form>
+
+    </dialog>
 </body>
 
 </html>

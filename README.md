@@ -25,19 +25,19 @@
 - [x]  use class to create the task, adding title, description, due-date, priority, notes. what project it's on.
 - [x]  use class to create a project then be able to add tasks to said project.
 - [x] class method to get module that gets all the tasks inside that project.
-- [ ] default project should be shown if its the first time on the app.have title and description
+- [x] default project should be shown if its the first time on the app.have title and description
 - [ ] separate logic from DOM manipulation
 - [x] creating task 
 - [x] deleting task
-- [ ] changing priority - use class method editTask and just assign an array with priority.
-- [ ] setting task a complete. using editTask method
+- [x] changing priority - use class method editTask and just assign an array with priority.
+- [x] setting task a complete. using editTask method
 - [x] editing task (use icons to show this)
-- [ ] setting task to project, use all projects and use a selection form to choose then match the titles 
+- [x] setting task to project, use all projects and use a selection form to choose then match the id's 
 - [x] creating project, 
 - [x] editing project
-- [ ] due date on project 
-- [ ] completed project, use getProjectTasks to check all completed is true then show all tasks are completed
-- [ ] deleting project. 
+- [x] due date on project, function to get 
+- [x] completed project, use getProjectTasks to check all completed is true then show all tasks are completed
+- [x] deleting project. 
 - [ ] handle if the task in not in local storage.
 - [ ] make sure to `stringify` when sending json data to local storage.
 
@@ -54,6 +54,7 @@ UI
 - [ ] on desktop, side bar with today, next 7 days, add task, add project. then projects titles are shown underneath. 
 - [ ] have a number on the side of the project to show how many tasks need doing.
 - [ ] display a message when there is not tasks
+- [ ] show form with a dialog modal, both task and project
 
 priority
 - Urgent (red)
