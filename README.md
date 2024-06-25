@@ -10,10 +10,10 @@
 
 
 ## Problems encountered
-- 
+- how to update the object.
 
 ## New skills
-- 
+- Using `Object.assign` to assign the new object to the existing object in the array. 
 
 ## Languages
 - HTML
@@ -24,18 +24,19 @@
 ### Sudo 
 - [x]  use class to create the task, adding title, description, due-date, priority, notes. what project it's on.
 - [x]  use class to create a project then be able to add tasks to said project.
+- [x] class method to get module that gets all the tasks inside that project.
 - [ ] default project should be shown if its the first time on the app.have title and description
 - [ ] separate logic from DOM manipulation
-- [ ] creating task 
-- [ ] deleting task
-- [ ] changing priority 
-- [ ] setting task a complete.
-- [ ] editing task (use icons to show this)
-- [ ] setting task to project
-- [ ] creating project, 
-- [ ] editing project
+- [x] creating task 
+- [x] deleting task
+- [ ] changing priority - use class method editTask and just assign an array with priority.
+- [ ] setting task a complete. using editTask method
+- [x] editing task (use icons to show this)
+- [ ] setting task to project, use all projects and use a selection form to choose then match the titles 
+- [x] creating project, 
+- [x] editing project
 - [ ] due date on project 
-- [ ] completed project 
+- [ ] completed project, use getProjectTasks to check all completed is true then show all tasks are completed
 - [ ] deleting project. 
 - [ ] handle if the task in not in local storage.
 - [ ] make sure to `stringify` when sending json data to local storage.
