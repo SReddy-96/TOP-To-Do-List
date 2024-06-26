@@ -92,7 +92,9 @@ function ProjectSelection(){
     ProjectSelect.innerHTML = ''
     const placeholderOption = document.createElement('option');
     placeholderOption.disabled = true;
-    placeholderOption.textContent = '--Choose a Project--'
+    placeholderOption.textContent = '--Choose a Project--';
+    placeholderOption.selected = true;
+    ProjectSelect.append(placeholderOption);
 
     // add projects to select form input, checking to see if Projects is null
     if (Projects === null) {

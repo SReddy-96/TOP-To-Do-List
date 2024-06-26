@@ -44,7 +44,7 @@
 UI
 - [ ] view all projects
 - [ ] view all tasks in project, just title and due-date. 
-- [ ] check box to click but use an icon, change when clicked which inturn changes the bool. , line through the task, 
+- [ ] check box to click but use an icon, change when clicked which inturn changes the bool. , line through the task, setting a class to a task
 - [ ] expand a single task to edit and delete
 - [ ] if the date is todays date it goes into a `Today` page, show title, which project, description, no due date as its today.
 - [ ] if all task are complete in project it changes color
@@ -54,7 +54,7 @@ UI
 - [ ] on desktop, side bar with today, next 7 days, add task, add project. then projects titles are shown underneath. 
 - [ ] have a number on the side of the project to show how many tasks need doing.
 - [ ] display a message when there is not tasks
-- [ ] show form with a dialog modal, both task and project
+- [x] show form with a dialog modal, both task and project
 
 priority
 - Urgent (red)

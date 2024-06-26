@@ -22,7 +22,7 @@ export default function TaskForm(TaskClass) {
         taskDueDate.value = format(new Date, 'yyyy-MM-dd');
         taskDueDate.min = format(new Date, 'yyyy-MM-dd');
 
-        dialog.showModal();
+        dialog.showModal();        
     });
 
     closeBtn.addEventListener("click", () => {
