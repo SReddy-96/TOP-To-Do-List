@@ -82,4 +82,34 @@ function completedProject(project) {
         return console.log("project not completed yet")
     }
 }
-export { createProject, DeleteProject, GetProjectsTasks, EditProject, completedProject }
+
+// getting the projects and adding to select input
+function ProjectSelection(){
+    const Projects = JSON.parse(localStorage.getItem('Projects'));
+    const ProjectSelect = document.getElementById('taskProjectSelect');
+
+    // clear the selection and add placeholder
+    ProjectSelect.innerHTML = ''
+    const placeholderOption = document.createElement('option');
+    placeholderOption.disabled = true;
+    placeholderOption.textContent = '--Choose a Project--'
+
+    // add projects to select form input, checking to see if Projects is null
+    if (Projects === null) {
+        const option = document.createElement('option')
+        option.disabled = true;
+        option.textContent = "No Projects";
+
+        ProjectSelect.append(option);
+    } else {
+        for (let i = 0; i < Projects.length; i++) {
+            const option = document.createElement('option')
+            option.value = Projects[i].id;
+            option.textContent = Projects[i].title;
+
+            ProjectSelect.append(option);
+        }
+    }
+}
+
+export { createProject, DeleteProject, GetProjectsTasks, EditProject, completedProject, ProjectSelection}

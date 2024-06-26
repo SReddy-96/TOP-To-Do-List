@@ -10,42 +10,73 @@
 <body>
     <h1>To-do List</h1>
     <div id="content">
-
+        <button id="showTaskForm">Add Task</button>
+        <button id="showProjectForm">Add Project</button>
     </div>
 
     <!-- Task form -->
-    <dialog open>
-        <form action="">
-            <label for="title">Title</label>
-            <input type="text" id="title">
+    <dialog id="taskFormDialog">
+        <form id="taskForm">
+            <legend>Add Task</legend>
 
-            <label for="description">description</label>
-            <input type="text" id="description">
+            <fieldset>
+                <label for="title">Title</label>
+                <input type="text" id="taskTitle">
 
-            <label for="priority">priority</label>
-            <select name="priority" id="priority">
-                <option disabled>--Choose a Priority--</option>
-                <option value="Urgent">Urgent</option>
-                <option value="Important">Important</option>
-                <option value="LowPriority">Low Priority</option>
-            </select>
+                <label for="description">Description</label>
+                <input type="text" id="taskDescription">
 
-            <label for="dueDate">Due Date</label>
-            <input type="date" name="dueDate" id="dueDate">
+                <label for="priority">Priority</label>
+                <select name="priority" id="taskPriority">
+                    <option disabled>--Choose a Priority--</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="Important">Important</option>
+                    <option value="LowPriority">Low Priority</option>
+                </select>
+            </fieldset>
 
-            <!-- leave select empty to fill when the dialog is active -->
-            <label for="ProjectSelect">Project</label>
-            <select name="project" id="ProjectSelect">
-                <option disabled selected>--Choose a Project--</option>
-            </select>
+            <fieldset>
+                <label for="dueDate">Due Date</label>
+                <input type="date" name="dueDate" id="taskDueDate">
 
-            <label for="notes">Notes</label>
-            <textarea name="notes" id="notes" cols="30" rows="10"></textarea>
+                <!-- leave select empty to fill when the dialog is active -->
+                <label for="ProjectSelect">Project</label>
+                <select name="project" id="taskProjectSelect">
+                </select>
 
-            <input type="button" value="submit">
+                <label for="notes">Notes</label>
+                <textarea name="notes" id="taskNotes" cols="10" rows="3"></textarea>
+            </fieldset>
+
+            <div id="taskFormButtons">
+                <button id="closeTaskForm" type="button">Close</button>
+                <input type="submit" value="Add Task">
+            </div>
         </form>
 
     </dialog>
+
+    <!-- Project form -->
+    <dialog id="projectFormDialog">
+        <form id="projectForm">
+
+            <legend>Add Project</legend>
+
+            <label for="title">Title</label>
+            <input type="text" id="projectTitle">
+
+            <label for="description">description</label>
+            <input type="text" id="projectDescription">
+
+            <div id="projectFormButtons">
+                <button id="closeProjectForm" type="button">Close</button>
+                <input type="submit" value="Add Project">
+            </div>
+        </form>
+
+    </dialog>
+
+
 </body>
 
 </html>

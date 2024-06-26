@@ -1,0 +1,152 @@
+/* CSS Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+    isolation: isolate;
+}
+
+/* --- */
+
+/* dialog */
+
+dialog {
+    animation: fade-out 0.5s ease-out;
+    align-self: center;
+    justify-self: center;
+}
+
+dialog[open] {
+    animation: fade-in 0.5s ease-out;
+}
+
+dialog[open]::backdrop {
+    animation: backdrop-fade-in 0.5s ease-out forwards;
+}
+
+/* Animation keyframes */
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: scaleY(0);
+        display: none;
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+        display: block;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+        transform: scaleY(1);
+        display: block;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scaleY(0);
+        display: none;
+    }
+}
+
+@keyframes backdrop-fade-in {
+    0% {
+        background-color: rgb(0 0 0 / 0%);
+    }
+
+    100% {
+        background-color: rgb(0 0 0 / 25%);
+    }
+}
+
+/* --- */
+
+#taskForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 5fr 1fr;
+}
+
+#projectForm{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+input,
+select,
+textarea {
+    margin-bottom: 0.5rem;
+}
+
+form legend {
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+}
+
+#taskForm legend{
+    grid-column: -1/1;
+}
+
+#taskFormButtons {
+    grid-column: -1/1;
+}
+
+#projectFormButtons,
+#taskFormButtons{
+    display: flex;
+    align-items: center;
+    justify-content:space-evenly;
+}
+

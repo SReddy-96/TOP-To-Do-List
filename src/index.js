@@ -1,7 +1,9 @@
 import { createTask, DeleteTask, EditTask, getTasksProject, TodaysTasks } from "./taskHelpers.js";
 import { createProject, DeleteProject, GetProjectsTasks, EditProject, completedProject } from "./projectHelpers.js";
-import { format, parse } from "date-fns";
+import { format } from "date-fns";
 import TaskForm from "./TaskForm.js";
+import ProjectForm from "./ProjectForm.js";
+import './style.css'
 
 // Task class
 class Task {
@@ -10,10 +12,10 @@ class Task {
         this.title = title;
         this.description = description;
         this.priority = priority;
-        this.dueDate = format(parse(dueDate, 'yyyy-MM-dd', new Date()), 'P')
+        this.dueDate = dueDate;
         this.project = project;
         this.notes = notes;
-        this.createdDate = format(new Date, 'P');
+        this.createdDate = format(new Date, 'yyyy-MM-dd');
         this.completed = false;
 
         this.createTaskMethod()
@@ -42,7 +44,7 @@ class Project {
         this.id = crypto.randomUUID();
         this.title = title;
         this.description = description;
-        this.createdDate = format(new Date, 'P');
+        this.createdDate = format(new Date, 'yyyy-MM-dd');
         this.completed = false;
 
         this.createProjectMethod();
@@ -71,13 +73,16 @@ class Project {
 
 const priorities = ['Urgent', 'Important', 'Low Priority'];
 
-// run script
+// run script for mock data
+if(window.localStorage.length === 0){
+    const DefaultProject = new Project('Default Project', 'This is a mock project to add your tasks too')
+    const MockTask = new Task('Mock Task', 'This is a mock Task', 'Important', '2024-07-25', DefaultProject.id, '6')
+}
 
-const DefaultProject = new Project('Default Project', 'This is a mock project to add your tasks too')
+// dialog forms for task anf project
+TaskForm(Task);
+ProjectForm(Project);
 
-const MockTask = new Task('Mock Task', 'This is a mock Task', 'Important', '2024-07-25', DefaultProject.id, '6')
-
-TaskForm()
 
 
 
