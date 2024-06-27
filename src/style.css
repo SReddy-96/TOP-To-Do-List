@@ -12,6 +12,7 @@
 body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    height: 100vh;
 }
 
 img,
@@ -277,7 +278,7 @@ nav button svg {
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
     border-radius: 1rem;
     display: grid;
-    grid-template-columns: 1fr 6fr 1fr 1fr;
+    grid-template-columns: 1fr 6fr 1fr;
     gap: 5px;
     align-items: center;
 
@@ -321,29 +322,19 @@ nav button svg {
     border-left: 4px solid lightblue;
 }
 
-.editIcon,
 .deleteIcon {
     fill: var(--dark-green);
     cursor: pointer;
 }
 
-.editIcon:hover {
-    fill: #5995DA;
-}
 
 .deleteIcon:hover {
     fill: hsl(0, 100%, 60%);
 }
 
-.editIcon:active {
-    fill: #407FC7;
-}
-
 .deleteIcon:active {
     fill: hsl(0, 100%, 50%);
 }
-
-
 
 /* --- */
 
@@ -352,26 +343,48 @@ nav button svg {
 .showTask {
     margin-top: 7vh;
     padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.showTask h2 {
+.showTaskWrapper {
+    border: 1px solid var(--off-white);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    padding: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.showTaskHeader {
+    display: flex;
+    align-items: center;
+}
+
+.showTaskHeader h2 {
     margin: 1rem;
 }
 
-.showTask p {
-    margin-bottom: 0.5rem;
-}
-
-.showTask svg {
+.showTaskHeader svg {
     width: 3rem;
     height: 3rem;
     fill: var(--dark-green);
     margin-right: 1rem;
 }
 
-.showTaskHeader {
+.showTaskMain p {
+    margin-bottom: 0.5rem;
+}
+
+.showTaskFooter {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
+    margin-top: 1.5rem;
+}
+
+.showTaskCreatedDate {
+    opacity: 50%;
 }
 
 /* --- */

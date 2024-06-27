@@ -50,7 +50,7 @@ UI
 - [ ] if all task are complete in project it changes color
 - [x] for priority, change the right hand side border color
 - [ ] go mobile first.
-- [ ] add a low nav bar to mobile with today, projects, add, option for project or task.
+- [x] add a low nav bar to mobile with today, projects, add, option for project or task.
 - [ ] on desktop, side bar with today, next 7 days, add task, add project. then projects titles are shown underneath. 
 - [ ] have a number on the side of the project to show how many tasks need doing.
 - [ ] display a message when there is not tasks

@@ -132,25 +132,6 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
-    // // edit icon handler
-    // const editTasks = document.querySelectorAll('.editIcon');
-    // editTasks.forEach((editTask) => {
-    //     editTask.addEventListener('click', function () {
-    //         const parentEl = editTask.parentElement;
-    //         const taskId = getTaskById(parentEl.dataset.id);
-
-    //         if (!taskId) {
-    //             console.error(taskId)
-    //         }
-    //         parentEl.style.opacity = '0';
-    //         setTimeout(() => {
-    //             EditTask(taskId);
-    //             parentEl.style.display = 'none';
-    //         }, 1000); // edit slowly
-
-    //     })
-    // })
-
     // show Task
     function showTaskInit(content) {
         const cardTitles = document.querySelectorAll('.cardTitle');
