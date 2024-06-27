@@ -38,10 +38,8 @@
     </nav>
 
     <div id="content">
-        <button id="showProjectForm">Add Project</button>
+
     </div>
-
-
 
     <!-- Task form -->
     <dialog id="taskFormDialog">
@@ -50,14 +48,13 @@
 
             <fieldset>
                 <label for="taskTitle">Title</label>
-                <input type="text" id="taskTitle" name="taskTitle" autofocus>
+                <input type="text" id="taskTitle" name="taskTitle" autofocus >
 
                 <label for="taskDescription">Description</label>
                 <input type="text" id="taskDescription" name="taskDescription">
 
                 <label for="taskPriority">Priority</label>
-                <select name="priority" id="taskPriority" name="taskPriority">
-                    <option disabled selected>--Choose a Priority--</option>
+                <select name="priority" id="taskPriority" name="taskPriority" required>
                     <option value="Urgent">Urgent</option>
                     <option value="Important">Important</option>
                     <option value="LowPriority">Low Priority</option>
@@ -70,7 +67,7 @@
 
                 <!-- leave select empty to fill when the dialog is active -->
                 <label for="taskProjectSelect">Project</label>
-                <select name="project" id="taskProjectSelect" name="taskProjectSelect">
+                <select name="project" id="taskProjectSelect" name="taskProjectSelect" required>
                 </select>
 
                 <label for="taskNotes">Notes</label>

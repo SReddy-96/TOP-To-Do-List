@@ -44,17 +44,20 @@
 UI
 - [ ] view all projects
 - [ ] view all tasks in project, just title and due-date. 
-- [ ] check box to click but use an icon, change when clicked which inturn changes the bool. , line through the task, setting a class to a task
+- [x] check box to click but use an icon, change when clicked which inturn changes the bool. , line through the task, setting a class to a task
 - [ ] expand a single task to edit and delete
-- [ ] if the date is todays date it goes into a `Today` page, show title, which project, description, no due date as its today.
+- [x] if the date is todays date it goes into a `Today` page, show title, which project, description, no due date as its today.
 - [ ] if all task are complete in project it changes color
-- [ ] for priority, change the right hand side border color
+- [x] for priority, change the right hand side border color
 - [ ] go mobile first.
 - [ ] add a low nav bar to mobile with today, projects, add, option for project or task.
 - [ ] on desktop, side bar with today, next 7 days, add task, add project. then projects titles are shown underneath. 
 - [ ] have a number on the side of the project to show how many tasks need doing.
 - [ ] display a message when there is not tasks
 - [x] show form with a dialog modal, both task and project
+- [ ] use ${} to add the right priority to show the color
+
+when going to project and back to today it looses the eventlistener!!!!!
 
 priority
 - Urgent (red)

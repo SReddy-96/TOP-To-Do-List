@@ -1,4 +1,4 @@
-import { isToday, isThisWeek  } from "date-fns";
+import { isToday, isThisWeek, isBefore } from "date-fns";
 
 // create a task
 function createTask(newTask) {
@@ -68,13 +68,13 @@ function TodaysTasks() {
 
     const TasksForToday = [];
 
-    // iterate over and if the date matches todays then add to array
+    // iterate over and if the date matches todays and before then add to array
     for (let i = 0; i < Tasks.length; i++) {
-        if (isToday(Tasks[i].dueDate) === true) {
+        if (isToday(Tasks[i].dueDate) === true || isBefore(Tasks[i].dueDate, new Date())) {
             TasksForToday.push(Tasks[i]);
         }
     }
-    
+
     // check if array is empty
     if (TasksForToday.length === 0) {
         return "No tasks for today"
@@ -84,18 +84,18 @@ function TodaysTasks() {
 }
 
 // check for the tasks in this week
-function WeeksTasks(){
+function WeeksTasks() {
     const Tasks = JSON.parse(localStorage.getItem('Tasks'));
 
     const TasksForTheWeek = [];
 
     // iterate over and if the date matches todays then add to array
     for (let i = 0; i < Tasks.length; i++) {
-        if (isThisWeek (Tasks[i].dueDate) === true) {
+        if (isThisWeek(Tasks[i].dueDate) === true) {
             TasksForTheWeek.push(Tasks[i]);
         }
     }
-    
+
     // check if array is empty
     if (TasksForTheWeek.length === 0) {
         return "No tasks for This Week"
@@ -103,4 +103,16 @@ function WeeksTasks(){
     return TasksForTheWeek;
 }
 
-export { createTask, DeleteTask, EditTask, getTasksProject, TodaysTasks, WeeksTasks }
+// get task by id
+function getTaskById(taskId) {
+    const Tasks = JSON.parse(localStorage.getItem('Tasks'));
+
+    for (let i = 0; i < Tasks.length; i++) {
+        if (Tasks[i].id === taskId) {
+            return Tasks[i]
+        }
+    }
+    return 'Task does not Exist'
+}
+
+export { createTask, DeleteTask, EditTask, getTasksProject, TodaysTasks, WeeksTasks, getTaskById }

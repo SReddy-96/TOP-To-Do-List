@@ -1,4 +1,4 @@
-import { createTask, DeleteTask, EditTask, getTasksProject } from "./taskHelpers.js";
+import { createTask, DeleteTask, EditTask, getTaskById, getTasksProject } from "./taskHelpers.js";
 import { createProject, DeleteProject, GetProjectsTasks, EditProject, completedProject } from "./projectHelpers.js";
 import { format } from "date-fns";
 import TaskForm from "./TaskForm.js";
@@ -31,10 +31,6 @@ class Task {
         return DeleteTask(this)
     }
 
-    editTaskMethod(editedTaskObject) {
-        return EditTask(this, editedTaskObject)
-    }
-
     getProject() {
         return getTasksProject(this)
     }
@@ -52,9 +48,9 @@ class Project {
         this.createProjectMethod();
     }
 
-    createProjectMethod(){
+    createProjectMethod() {
         return createProject(this);
-}
+    }
 
     DeleteProjectMethod() {
         return DeleteProject(this);
@@ -76,41 +72,67 @@ class Project {
 const priorities = ['Urgent', 'Important', 'Low Priority'];
 
 // run script for mock data
-if(window.localStorage.length === 0){
+if (window.localStorage.length === 0) {
     const DefaultProject = new Project('Default Project', 'This is a mock project to add your tasks too')
     const MockTask = new Task('Mock Task', 'This is a mock Task', 'Important', '2024-06-26', DefaultProject.id, '6')
 }
 
 // dialog forms for task anf project
 TaskForm(Task);
-ProjectForm(Project);
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     const content = document.getElementById('content');
 
     const todayButton = document.getElementById('today');
     const projectButton = document.getElementById('project');
-    
-    TodayPage(content)
+
+    TodayPage(Task, content)
     todayButton.classList.add('activePage')
     content.className = ''
 
-    todayButton.addEventListener('click', function(){
+    todayButton.addEventListener('click', function () {
         content.innerHTML = ''; // empty content div
         content.className = ''
-        TodayPage(content)
+        TodayPage(Task, content)
         todayButton.classList.add('activePage')
         projectButton.classList.remove('activePage')
     })
-    
-    
-    projectButton.addEventListener('click', function(){
+
+
+    projectButton.addEventListener('click', function () {
         content.innerHTML = ''; // empty content div
         content.className = ''
-        ProjectsPage(content)
+        ProjectsPage(Task, content)
+        ProjectForm(Project);
         projectButton.classList.add('activePage')
         todayButton.classList.remove('activePage')
     })
+
+    // eventlistener to change complete and line through 
+    const taskCheckboxes = document.querySelectorAll('.taskCheckbox')
+    taskCheckboxes.forEach((taskCheckbox) => {
+        taskCheckbox.addEventListener('change', () => {
+            const taskId = getTaskById(taskCheckbox.dataset.id)
+
+            // get title of task
+            const taskCard = taskCheckbox.parentElement;
+            const taskTitle = taskCard.children[1]
+            
+            if (!taskId) {
+                console.error(taskId)
+            }
+            if (taskId.completed === true) {
+                taskTitle.classList.remove('checkedTitle');
+                EditTask(taskId, { completed: false });
+            } else {
+                taskTitle.classList.add('checkedTitle');
+                EditTask(taskId, { completed: true });
+            }
+        })
+
+    })
+
+
 
 })
 
