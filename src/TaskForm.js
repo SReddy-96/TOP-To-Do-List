@@ -30,7 +30,6 @@ export default function TaskForm(TaskClass) {
     });
 
     taskForm.addEventListener('submit', function (e) {
-        e.preventDefault()
         const taskTitle = document.getElementById('taskTitle').value;
         const taskDescription = document.getElementById('taskDescription').value;
         const taskPriority = document.getElementById('taskPriority').value;
@@ -40,12 +39,6 @@ export default function TaskForm(TaskClass) {
 
         // create new task with class
         new TaskClass(taskTitle, taskDescription, taskPriority, taskDueDate, taskProjectSelect, taskNotes)
-
-        //  close dialog
-        dialog.close()
-
-        // empty for next time
-        this.reset()
 
     })
 

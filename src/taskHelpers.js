@@ -66,6 +66,11 @@ function getTasksProject(currentTask) {
 function TodaysTasks() {
     const Tasks = JSON.parse(localStorage.getItem('Tasks'));
 
+    // check if array is empty
+    if (Tasks.length === 0) {
+        return "No tasks for today"
+    }
+
     const TasksForToday = [];
 
     // iterate over and if the date matches todays and before then add to array
@@ -75,10 +80,7 @@ function TodaysTasks() {
         }
     }
 
-    // check if array is empty
-    if (TasksForToday.length === 0) {
-        return "No tasks for today"
-    }
+
     return TasksForToday;
 
 }
@@ -115,4 +117,32 @@ function getTaskById(taskId) {
     return 'Task does not Exist'
 }
 
-export { createTask, DeleteTask, EditTask, getTasksProject, TodaysTasks, WeeksTasks, getTaskById }
+// eventlistener to change complete and line through 
+function toggleCheckedTask() {
+    const taskCheckboxes = document.querySelectorAll('.taskCheckbox')
+    taskCheckboxes.forEach((taskCheckbox) => {
+        taskCheckbox.addEventListener('change', () => {
+            // get title of task
+            const taskCard = taskCheckbox.parentElement;
+            const taskTitle = taskCard.children[1]
+
+            // get task ID
+            const taskId = getTaskById(taskCard.dataset.id)
+
+            if (!taskId) {
+                console.error(taskId)
+            }
+            if (taskId.completed === true) {
+                taskTitle.classList.remove('checkedTitle');
+                EditTask(taskId, { completed: false });
+            } else {
+                taskTitle.classList.add('checkedTitle');
+                EditTask(taskId, { completed: true });
+            }
+        })
+
+    })
+}
+
+
+export { createTask, DeleteTask, EditTask, getTasksProject, TodaysTasks, WeeksTasks, getTaskById, toggleCheckedTask }

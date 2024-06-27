@@ -57,7 +57,7 @@ UI
 - [x] show form with a dialog modal, both task and project
 - [ ] use ${} to add the right priority to show the color
 
-when going to project and back to today it looses the eventlistener!!!!!
+when going to project and back to today it looses the event listener!!!!!
 
 priority
 - Urgent (red)

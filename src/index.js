@@ -1,4 +1,4 @@
-import { createTask, DeleteTask, EditTask, getTaskById, getTasksProject } from "./taskHelpers.js";
+import { createTask, DeleteTask, EditTask, getTaskById, getTasksProject, toggleCheckedTask } from "./taskHelpers.js";
 import { createProject, DeleteProject, GetProjectsTasks, EditProject, completedProject } from "./projectHelpers.js";
 import { format } from "date-fns";
 import TaskForm from "./TaskForm.js";
@@ -6,6 +6,7 @@ import ProjectForm from "./ProjectForm.js";
 import TodayPage from "./TodayPage.js";
 import ProjectsPage from "./ProjectsPage.js";
 import './style.css'
+import showTask from "./showTask.js";
 
 // Task class
 class Task {
@@ -25,10 +26,6 @@ class Task {
 
     createTaskMethod() {
         return createTask(this)
-    }
-
-    DeleteTaskMethod() {
-        return DeleteTask(this)
     }
 
     getProject() {
@@ -85,15 +82,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const todayButton = document.getElementById('today');
     const projectButton = document.getElementById('project');
-
-    TodayPage(Task, content)
+    
+    TodayPage(content);
+    toggleCheckedTask();
+    deleteTaskInit(content);
+    showTaskInit(content);
     todayButton.classList.add('activePage')
-    content.className = ''
+    content.className = 'todayContent'
 
     todayButton.addEventListener('click', function () {
         content.innerHTML = ''; // empty content div
-        content.className = ''
-        TodayPage(Task, content)
+        content.className = 'todayContent'
+        TodayPage(content)
+        toggleCheckedTask()
+        showTaskInit(content)
+        deleteTaskInit(content)
         todayButton.classList.add('activePage')
         projectButton.classList.remove('activePage')
     })
@@ -102,40 +105,64 @@ document.addEventListener('DOMContentLoaded', function () {
     projectButton.addEventListener('click', function () {
         content.innerHTML = ''; // empty content div
         content.className = ''
-        ProjectsPage(Task, content)
+        ProjectsPage(content)
         ProjectForm(Project);
         projectButton.classList.add('activePage')
         todayButton.classList.remove('activePage')
     })
 
-    // eventlistener to change complete and line through 
-    const taskCheckboxes = document.querySelectorAll('.taskCheckbox')
-    taskCheckboxes.forEach((taskCheckbox) => {
-        taskCheckbox.addEventListener('change', () => {
-            const taskId = getTaskById(taskCheckbox.dataset.id)
+    // delete icon handler
+    function deleteTaskInit(content) {
+        const deleteTasks = document.querySelectorAll('.deleteIcon');
+        deleteTasks.forEach((deleteTask) => {
+            deleteTask.addEventListener('click', function () {
+                const parentEl = deleteTask.parentElement;
+                const taskId = getTaskById(parentEl.dataset.id);
 
-            // get title of task
-            const taskCard = taskCheckbox.parentElement;
-            const taskTitle = taskCard.children[1]
-            
-            if (!taskId) {
-                console.error(taskId)
-            }
-            if (taskId.completed === true) {
-                taskTitle.classList.remove('checkedTitle');
-                EditTask(taskId, { completed: false });
-            } else {
-                taskTitle.classList.add('checkedTitle');
-                EditTask(taskId, { completed: true });
-            }
+                if (!taskId) {
+                    console.error(taskId)
+                }
+                parentEl.style.opacity = '0';
+                setTimeout(() => {
+                    DeleteTask(taskId);
+                    parentEl.style.display = 'none';
+                }, 1000); // delete slowly
+
+            })
         })
+    }
 
-    })
+    // // edit icon handler
+    // const editTasks = document.querySelectorAll('.editIcon');
+    // editTasks.forEach((editTask) => {
+    //     editTask.addEventListener('click', function () {
+    //         const parentEl = editTask.parentElement;
+    //         const taskId = getTaskById(parentEl.dataset.id);
 
+    //         if (!taskId) {
+    //             console.error(taskId)
+    //         }
+    //         parentEl.style.opacity = '0';
+    //         setTimeout(() => {
+    //             EditTask(taskId);
+    //             parentEl.style.display = 'none';
+    //         }, 1000); // edit slowly
 
+    //     })
+    // })
 
+    // show Task
+    function showTaskInit(content) {
+        const cardTitles = document.querySelectorAll('.cardTitle');
+        cardTitles.forEach((cardTitle) => {
+            cardTitle.addEventListener('click', function () {
+                const parentEl = cardTitle.parentElement;
+                const taskObject = getTaskById(parentEl.dataset.id);
+
+                showTask(content, taskObject);
+            })
+
+        })
+    }
 })
-
-
-
 

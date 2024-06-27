@@ -1,6 +1,10 @@
 import { TodaysTasks } from './taskHelpers.js'
 
-export default function TodayPage(Task, content) {
+export default function TodayPage(content) {
+
+    // clear the content
+    content.innerHTML = '';
+
     const todayHeader = document.createElement('h2');
     todayHeader.classList.add('pageHeader')
     todayHeader.textContent = 'Today'
@@ -8,16 +12,17 @@ export default function TodayPage(Task, content) {
     const todaysTasks = TodaysTasks()
 
     if (typeof (todaysTasks) === 'string') {
-        content.append(todaysTasks);
+        return content.append(todaysTasks);
     }
 
     for (let i = 0; i < todaysTasks.length; i++) {
         const wrapper = document.createElement('div');
+        wrapper.dataset.id = todaysTasks[i].id;
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.classList.add('taskCheckbox');
-        checkbox.dataset.id = todaysTasks[i].id;
         const title = document.createElement('p');
+        title.classList.add('cardTitle')
 
         // get priority
         wrapper.classList.add(`priority_${todaysTasks[i].priority}`);

@@ -175,11 +175,11 @@ form legend {
 }
 
 .danger-button:hover {
-    background-color: hsl(0, 100%, 70%)
+    background-color: hsl(0, 100%, 70%);
 }
 
 .danger-button:active {
-    background-color: hsl(0, 100%, 50%)
+    background-color: hsl(0, 100%, 50%);
 }
 
 
@@ -255,12 +255,15 @@ nav button svg {
 
 /* content */
 
-#content {
+
+.todayContent {
     margin-top: 7vh;
     padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(100px, auto));
+    align-items: center;
+    overflow: auto;
+    gap: 1rem;
 }
 
 /* ---- */
@@ -275,10 +278,13 @@ nav button svg {
     border-radius: 1rem;
     display: grid;
     grid-template-columns: 1fr 6fr 1fr 1fr;
-    margin-bottom: 1rem;
     gap: 5px;
     align-items: center;
 
+    /* when deleting */
+    opacity: 1;
+    -webkit-transition: opacity 1000ms linear;
+    transition: opacity 1000ms linear;
 }
 
 .taskCard input[type='checkbox'] {
@@ -291,6 +297,7 @@ nav button svg {
     font-weight: bold;
     overflow: auto;
     font-size: large;
+    cursor: pointer;
 }
 
 .taskCard svg {
@@ -314,7 +321,58 @@ nav button svg {
     border-left: 4px solid lightblue;
 }
 
+.editIcon,
+.deleteIcon {
+    fill: var(--dark-green);
+    cursor: pointer;
+}
 
+.editIcon:hover {
+    fill: #5995DA;
+}
+
+.deleteIcon:hover {
+    fill: hsl(0, 100%, 60%);
+}
+
+.editIcon:active {
+    fill: #407FC7;
+}
+
+.deleteIcon:active {
+    fill: hsl(0, 100%, 50%);
+}
+
+
+
+/* --- */
+
+/* show task page  */
+
+.showTask {
+    margin-top: 7vh;
+    padding: 2rem;
+}
+
+.showTask h2 {
+    margin: 1rem;
+}
+
+.showTask p {
+    margin-bottom: 0.5rem;
+}
+
+.showTask svg {
+    width: 3rem;
+    height: 3rem;
+    fill: var(--dark-green);
+    margin-right: 1rem;
+}
+
+.showTaskHeader {
+    display: flex;
+    align-items: center;
+}
 
 /* --- */
 
