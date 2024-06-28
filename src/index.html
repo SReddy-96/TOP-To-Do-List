@@ -44,11 +44,11 @@
     <!-- Task form -->
     <dialog id="taskFormDialog">
         <form id="taskForm">
-            <legend>Add Task</legend>
+            <legend id="formLegend"></legend>
 
             <fieldset>
                 <label for="taskTitle">Title</label>
-                <input type="text" id="taskTitle" name="taskTitle" autofocus >
+                <input type="text" id="taskTitle" name="taskTitle" autofocus>
 
                 <label for="taskDescription">Description</label>
                 <input type="text" id="taskDescription" name="taskDescription">
@@ -74,9 +74,14 @@
                 <textarea name="taskNotes" id="taskNotes" cols="10" rows="3"></textarea>
             </fieldset>
 
+            <input type="hidden" id="taskId" data-current="">
+
             <div id="taskFormButtons">
                 <button id="closeTaskForm" type="button" class="form-button danger-button">Close</button>
-                <input type="submit" value="Add Task" class="form-button success-button">
+                <input type="submit" value="Add Task" name="action" id="addTaskFormButton"
+                    class="form-button success-button">
+                <input type="submit" value="Edit Task" name="action" id="editTaskFormButton"
+                    class="form-button success-button">
             </div>
         </form>
 
@@ -89,7 +94,7 @@
             <legend>Add Project</legend>
 
             <label for="projectTitle">Title</label>
-            <input type="text" id="projectTitle" name="projectTitle" autofocus>
+            <input type="text" id="projectTitle" name="projectTitle" required autofocus>
 
             <label for="projectDescription">description</label>
             <input type="text" id="projectDescription" name="projectDescription">

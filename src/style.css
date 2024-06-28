@@ -12,7 +12,7 @@
 body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    height: 100vh;
+    min-height: auto;
 }
 
 img,
@@ -51,7 +51,7 @@ h6 {
 :root {
     --off-white: hsl(0, 0%, 97%);
     --light-green: hsl(120, 71%, 30%, 0.4);
-    --dark-green: hsl(120, 71%, 30%);
+    --dark-green: rgb(22, 131, 22);
 }
 
 /* dialog */
@@ -230,6 +230,10 @@ nav button svg {
     border-top: 5px solid var(--light-green);
 }
 
+.toggleHidden {
+    display: none;
+}
+
 /* --- */
 
 /* header */
@@ -257,15 +261,46 @@ nav button svg {
 /* content */
 
 
-.todayContent {
+.TaskContent {
     margin-top: 7vh;
+    margin-bottom: 12vh;
     padding: 1rem;
     display: grid;
     grid-template-rows: repeat(auto-fill, minmax(100px, auto));
     align-items: center;
     overflow: auto;
     gap: 1rem;
+    min-height: auto;
 }
+
+.ProjectList {
+    margin-top: 7vh;
+    margin-bottom: 12vh;
+    padding: 1rem;
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(100px, auto));
+    align-items: center;
+    overflow: auto;
+    gap: 1rem;
+    min-height: auto;
+}
+
+#showProjectForm {
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: var(--dark-green);
+}
+
+#showProjectForm:active {
+    background-color: var(--light-green);
+}
+
+
 
 /* ---- */
 
@@ -275,7 +310,7 @@ nav button svg {
     width: 100%;
     padding: 1rem;
     border: 1px solid var(--off-white);
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px;
     border-radius: 1rem;
     display: grid;
     grid-template-columns: 1fr 6fr 1fr;
@@ -308,6 +343,7 @@ nav button svg {
 
 .checkedTitle {
     text-decoration: 2px line-through;
+    opacity: 40%;
 }
 
 .priority_Urgent {
@@ -385,6 +421,35 @@ nav button svg {
 
 .showTaskCreatedDate {
     opacity: 50%;
+}
+
+/* --- */
+
+/* project list page  */
+
+.uncheckedIcon,
+.checkedIcon {
+    fill: var(--dark-green);
+}
+
+.taskCounter,
+.projectCompleted {
+    border-radius: 80%;
+    border: 1px solid var(--light-green);
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.projectCompleted {
+    display: none;
+}
+
+.taskCounter {
+    background: radial-gradient(var(--off-white), var(--light-green));
 }
 
 /* --- */

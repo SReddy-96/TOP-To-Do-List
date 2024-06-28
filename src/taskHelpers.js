@@ -58,7 +58,7 @@ function getTasksProject(currentTask) {
         // return project object for task 
         return Projects[ProjectIndex];
     } else {
-        console.error('Project does not exist')
+        return ('No Project')
     }
 }
 

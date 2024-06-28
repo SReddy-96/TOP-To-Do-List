@@ -42,22 +42,22 @@
 - [ ] make sure to `stringify` when sending json data to local storage.
 
 UI
-- [ ] view all projects
+- [x] view all projects
 - [ ] view all tasks in project, just title and due-date. 
 - [x] check box to click but use an icon, change when clicked which inturn changes the bool. , line through the task, setting a class to a task
-- [ ] expand a single task to edit and delete
+- [x] expand a single task to edit and delete
 - [x] if the date is todays date it goes into a `Today` page, show title, which project, description, no due date as its today.
-- [ ] if all task are complete in project it changes color
+- [x] if all task are complete ticked icon
 - [x] for priority, change the right hand side border color
-- [ ] go mobile first.
+- [x] go mobile first.
 - [x] add a low nav bar to mobile with today, projects, add, option for project or task.
 - [ ] on desktop, side bar with today, next 7 days, add task, add project. then projects titles are shown underneath. 
-- [ ] have a number on the side of the project to show how many tasks need doing.
-- [ ] display a message when there is not tasks
+- [x] have a number on the side of the project to show how many tasks need doing.
+- [x] display a message when there is not tasks
 - [x] show form with a dialog modal, both task and project
-- [ ] use ${} to add the right priority to show the color
+- [x] use ${} to add the right priority to show the color
 
-when going to project and back to today it looses the event listener!!!!!
+error! with event handling the add project form !!!!!
 
 priority
 - Urgent (red)

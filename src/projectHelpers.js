@@ -62,39 +62,38 @@ function EditProject(currentProject, newProject) {
 }
 
 // check if project is completed, takes project object
-function completedProject(project) {
-    const projectTasks = GetProjectsTasks(project);
+function completedProjects() {
+    const projects = JSON.parse(localStorage.getItem('Projects'));
 
-    let checker = 0;
-    // iterate over tasks checking if all task are complete
-    for (let i = 0; i < projectTasks.length; i++) {
-        if (projectTasks[i].completed === false) {
-            return console.log("project not completed yet")
-        } else {
-            checker++;
+    projects.map((project) => {
+        const projectTasks = GetProjectsTasks(project);
+
+        let checker = 0;
+        // iterate over tasks checking if all task are complete
+        for (let i = 0; i < projectTasks.length; i++) {
+            if (projectTasks[i].completed === false) {
+                return EditProject(project, { completed: false })
+            } else {
+                checker++;
+            }
         }
-    }
-    // check to make sure the checker counter matches the length of the array.
-    if (projectTasks.length === checker) {
-        EditProject(project, { completed: true })
-        return console.log("project Completed!")
-    } else {
-        return console.log("project not completed yet")
-    }
+        // check to make sure the checker counter matches the length of the array.
+        if (projectTasks.length === checker) {
+            EditProject(project, { completed: true })
+        } 
+    })
+    return console.log("project scan complete")
+
+
 }
 
 // getting the projects and adding to select input
-function ProjectSelection(){
+function ProjectSelection() {
     const Projects = JSON.parse(localStorage.getItem('Projects'));
     const ProjectSelect = document.getElementById('taskProjectSelect');
 
-    // clear the selection and add placeholder
+    // clear the selection
     ProjectSelect.innerHTML = ''
-    const placeholderOption = document.createElement('option');
-    placeholderOption.disabled = true;
-    placeholderOption.textContent = '--Choose a Project--';
-    placeholderOption.selected = true;
-    ProjectSelect.append(placeholderOption);
 
     // add projects to select form input, checking to see if Projects is null
     if (Projects === null) {
@@ -114,4 +113,17 @@ function ProjectSelection(){
     }
 }
 
-export { createProject, DeleteProject, GetProjectsTasks, EditProject, completedProject, ProjectSelection}
+// get project by id
+function getProjectById(projectId) {
+    const projects = JSON.parse(localStorage.getItem('Projects'));
+
+    for (let i = 0; i < projects.length; i++) {
+        if (projects[i].id === projectId) {
+            return projects[i]
+        }
+    }
+    return 'project does not Exist'
+}
+
+
+export { createProject, DeleteProject, GetProjectsTasks, EditProject, completedProjects, ProjectSelection, getProjectById }

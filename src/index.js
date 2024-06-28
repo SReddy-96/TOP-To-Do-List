@@ -1,12 +1,10 @@
-import { createTask, DeleteTask, EditTask, getTaskById, getTasksProject, toggleCheckedTask } from "./taskHelpers.js";
-import { createProject, DeleteProject, GetProjectsTasks, EditProject, completedProject } from "./projectHelpers.js";
+import { createTask} from "./taskHelpers.js";
+import { createProject} from "./projectHelpers.js";
 import { format } from "date-fns";
 import TaskForm from "./TaskForm.js";
-import ProjectForm from "./ProjectForm.js";
-import TodayPage from "./TodayPage.js";
+import TaskPage from "./TaskPage.js";
 import ProjectsPage from "./ProjectsPage.js";
 import './style.css'
-import showTask from "./showTask.js";
 
 // Task class
 class Task {
@@ -27,10 +25,6 @@ class Task {
     createTaskMethod() {
         return createTask(this)
     }
-
-    getProject() {
-        return getTasksProject(this)
-    }
 }
 
 // project class
@@ -48,22 +42,6 @@ class Project {
     createProjectMethod() {
         return createProject(this);
     }
-
-    DeleteProjectMethod() {
-        return DeleteProject(this);
-    }
-
-    getTasks() {
-        return GetProjectsTasks(this);
-    }
-
-    editProjectMethod(editedProjectObject) {
-        return EditProject(this, editedProjectObject);
-    }
-
-    isProjectCompleted() {
-        return completedProject(this);
-    }
 }
 
 const priorities = ['Urgent', 'Important', 'Low Priority'];
@@ -74,29 +52,20 @@ if (window.localStorage.length === 0) {
     const MockTask = new Task('Mock Task', 'This is a mock Task', 'Important', '2024-06-26', DefaultProject.id, '6')
 }
 
-// dialog forms for task anf project
-TaskForm(Task);
-
 document.addEventListener('DOMContentLoaded', function () {
     const content = document.getElementById('content');
 
     const todayButton = document.getElementById('today');
     const projectButton = document.getElementById('project');
-    
-    TodayPage(content);
-    toggleCheckedTask();
-    deleteTaskInit(content);
-    showTaskInit(content);
+
+    TaskPage(content, 'Today');
     todayButton.classList.add('activePage')
-    content.className = 'todayContent'
+    content.className = 'TaskContent'
 
     todayButton.addEventListener('click', function () {
         content.innerHTML = ''; // empty content div
-        content.className = 'todayContent'
-        TodayPage(content)
-        toggleCheckedTask()
-        showTaskInit(content)
-        deleteTaskInit(content)
+        content.className = 'TaskContent'
+        TaskPage(content, 'Today')
         todayButton.classList.add('activePage')
         projectButton.classList.remove('activePage')
     })
@@ -104,46 +73,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     projectButton.addEventListener('click', function () {
         content.innerHTML = ''; // empty content div
-        content.className = ''
-        ProjectsPage(content)
-        ProjectForm(Project);
+        content.className = 'ProjectList'
+        ProjectsPage(content, Project)
         projectButton.classList.add('activePage')
         todayButton.classList.remove('activePage')
     })
 
-    // delete icon handler
-    function deleteTaskInit(content) {
-        const deleteTasks = document.querySelectorAll('.deleteIcon');
-        deleteTasks.forEach((deleteTask) => {
-            deleteTask.addEventListener('click', function () {
-                const parentEl = deleteTask.parentElement;
-                const taskId = getTaskById(parentEl.dataset.id);
 
-                if (!taskId) {
-                    console.error(taskId)
-                }
-                parentEl.style.opacity = '0';
-                setTimeout(() => {
-                    DeleteTask(taskId);
-                    parentEl.style.display = 'none';
-                }, 1000); // delete slowly
+    // open dialog forms for task and project
+    const addTaskButton = document.getElementById("showTaskForm");
+    addTaskButton.addEventListener('click', function () {
+        TaskForm(Task);
+    })
 
-            })
-        })
-    }
-
-    // show Task
-    function showTaskInit(content) {
-        const cardTitles = document.querySelectorAll('.cardTitle');
-        cardTitles.forEach((cardTitle) => {
-            cardTitle.addEventListener('click', function () {
-                const parentEl = cardTitle.parentElement;
-                const taskObject = getTaskById(parentEl.dataset.id);
-
-                showTask(content, taskObject);
-            })
-
-        })
-    }
 })
 

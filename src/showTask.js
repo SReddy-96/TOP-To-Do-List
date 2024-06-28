@@ -1,3 +1,4 @@
+import TaskForm from './TaskForm.js';
 import { getTasksProject } from './taskHelpers.js';
 
 export default function showTask(content, taskObject) {
@@ -35,7 +36,6 @@ export default function showTask(content, taskObject) {
     footer.classList.add('showTaskFooter');
 
 
-
     // add unchecked
     const uncheckedIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     uncheckedIcon.setAttribute('viewBox', '0 0 24 24');
@@ -60,10 +60,10 @@ export default function showTask(content, taskObject) {
 
     // main
     description.textContent = `${taskObject.description}`;
-    priority.textContent = `Priority: ${taskObject.priority}`;
-    dueDate.textContent = `Task Completed by: ${taskObject.dueDate}`;
-    project.textContent = `Project: ${tasksProject.title}`;
-    notes.textContent = `Notes: ${taskObject.notes}`;
+    priority.innerHTML = `<b>Priority:</b> ${taskObject.priority}`;
+    dueDate.innerHTML = `<b>Task Completed by:</b> ${taskObject.dueDate}`;
+    project.innerHTML = `<b>Project:</b> ${tasksProject.title}`;
+    notes.innerHTML = `<b>Notes:</b> ${taskObject.notes}`;
 
     main.append(description, priority, project, dueDate, notes,)
     main.classList.add('showTaskMain')
@@ -72,5 +72,10 @@ export default function showTask(content, taskObject) {
     wrapper.append(header, main, footer);
     wrapper.classList.add('showTaskWrapper');
     content.append(wrapper);
+
+    editButton.addEventListener('click', function () {
+        const placeholder = '';
+        TaskForm(placeholder, taskObject)
+    })
 
 }

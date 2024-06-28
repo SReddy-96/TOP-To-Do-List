@@ -1,18 +1,16 @@
+import ProjectsPage from './ProjectsPage.js';
 import {ProjectSelection} from './projectHelpers.js';
 
 // activate the project form dialog
 export default function ProjectForm(projectClass) {
     // handle open/close of dialog
     const dialog = document.getElementById('projectFormDialog');
-    const showBtn = document.getElementById("showProjectForm");
     const closeBtn = document.getElementById("closeProjectForm");
 
     const projectForm = document.getElementById('projectForm');
-
-    // dialog open and close 
-    showBtn.addEventListener("click", () => {
-        dialog.showModal();
-    });
+    
+    // open when function is called
+    dialog.showModal()
 
     closeBtn.addEventListener("click", () => {
         dialog.close();
@@ -33,7 +31,12 @@ export default function ProjectForm(projectClass) {
 
         // update form selection
         ProjectSelection()
-    })
+        
+        // reload project page
+        const content = document.getElementById('content')
+        ProjectsPage(content)
+        
+    }, {once: true})
 
 
 }
