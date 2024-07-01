@@ -1,11 +1,11 @@
 import { completedProjects, GetProjectsTasks } from "./projectHelpers";
-import ProjectForm from "./ProjectForm.js";
+import TaskPage from "./TaskPage.js";
 
-export default function ProjectsPage(content, ProjectClass) {
-    
+export default function ProjectsPage(content) {
+
     // clear page 
-    content.innerHTML = ''    
-    
+    content.innerHTML = ''
+
     const title = document.createElement('h2');
     const addProjectButton = document.createElement('button');
     addProjectButton.id = 'showProjectForm';
@@ -26,6 +26,7 @@ export default function ProjectsPage(content, ProjectClass) {
         const title = document.createElement('p');
         title.classList.add('ProjectCardTitle');
         title.textContent = project.title;
+        title.dataset.id = project.id;
         const completedIconCell = document.createElement('div');
 
         // add unchecked
@@ -59,19 +60,33 @@ export default function ProjectsPage(content, ProjectClass) {
                 }
             })
             taskCounter.textContent = counter;
-        } else{
+        } else {
             taskCounter.classList.add('projectCompleted');
         }
-        
+
         wrapper.append(completedIconCell, title, taskCounter);
 
         content.append(wrapper);
     })
-    
+
     // handle opening the dialog
+    const dialog = document.getElementById('projectFormDialog');
     const showBtn = document.getElementById("showProjectForm");
     showBtn.addEventListener("click", () => {
-        ProjectForm(ProjectClass)
+        // open when function is called
+        dialog.showModal()
     });
+
+    const closeBtn = document.getElementById("closeProjectForm");
+    closeBtn.addEventListener("click", () => {
+        dialog.close();
+    });
+    
+    const ProjectCardTitle = document.querySelectorAll('.ProjectCardTitle');
+    ProjectCardTitle.forEach((title)=>{
+            title.addEventListener('click', function(){
+                TaskPage(content, this.dataset.id)
+            })
+        })
 
 }

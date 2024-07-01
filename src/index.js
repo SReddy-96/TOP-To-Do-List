@@ -1,9 +1,11 @@
-import { createTask} from "./taskHelpers.js";
-import { createProject} from "./projectHelpers.js";
+import { createTask, EditTask, getTaskById } from "./taskHelpers.js";
+import { createProject } from "./projectHelpers.js";
 import { format } from "date-fns";
 import TaskForm from "./TaskForm.js";
 import TaskPage from "./TaskPage.js";
 import ProjectsPage from "./ProjectsPage.js";
+import ProjectForm from "./ProjectForm.js";
+import showTask from "./showTask.js";
 import './style.css'
 
 // Task class
@@ -62,6 +64,10 @@ document.addEventListener('DOMContentLoaded', function () {
     todayButton.classList.add('activePage')
     content.className = 'TaskContent'
 
+    // initialize the project form and task form
+    ProjectForm(Project)
+    TaskForm();
+
     todayButton.addEventListener('click', function () {
         content.innerHTML = ''; // empty content div
         content.className = 'TaskContent'
@@ -81,10 +87,79 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // open dialog forms for task and project
+    const dialog = document.getElementById('taskFormDialog');
+    const closeBtn = document.getElementById("closeTaskForm");
     const addTaskButton = document.getElementById("showTaskForm");
+
     addTaskButton.addEventListener('click', function () {
-        TaskForm(Task);
+        TaskForm();
+        dialog.showModal();
     })
 
+    closeBtn.addEventListener("click", () => {
+        dialog.close();
+    });
+
+
+    const taskForm = document.getElementById('taskForm');
+    // set the event listeners for the task form
+    taskForm.addEventListener('submit', function (e) {
+        e.preventDefault()
+
+        const action = document.activeElement.value;
+
+        if (action === 'Add Task') {
+            const taskTitle = document.getElementById('taskTitle').value;
+            const taskDescription = document.getElementById('taskDescription').value;
+            const taskPriority = document.getElementById('taskPriority').value;
+            const taskDueDate = document.getElementById('taskDueDate').value;
+            const taskProjectSelect = document.getElementById('taskProjectSelect').value;
+            const taskNotes = document.getElementById('taskNotes').value;
+
+            // create new task with class
+            new Task(taskTitle, taskDescription, taskPriority, taskDueDate, taskProjectSelect, taskNotes)
+
+            const content = document.getElementById('content');
+            content.innerHTML = ''; // empty content div
+            content.className = 'TaskContent'
+            TaskPage(content, 'Today')
+            todayButton.classList.add('activePage')
+            projectButton.classList.remove('activePage')
+            dialog.close()
+
+        }
+
+        else if (action === 'Edit Task') {
+
+            const taskTitle = document.getElementById('taskTitle').value;
+            const taskDescription = document.getElementById('taskDescription').value;
+            const taskPriority = document.getElementById('taskPriority').value;
+            const taskDueDate = document.getElementById('taskDueDate').value;
+            const taskProjectSelect = document.getElementById('taskProjectSelect').value;
+            const taskNotes = document.getElementById('taskNotes').value;
+            const taskId = document.getElementById('taskId').dataset.current;
+
+            const editedTask = {
+                title: taskTitle,
+                description: taskDescription,
+                priority: taskPriority,
+                dueDate: taskDueDate,
+                project: taskProjectSelect,
+                notes: taskNotes
+            }
+
+            const currentTask = getTaskById(taskId)
+
+            EditTask(currentTask, editedTask);
+
+            const updateShowTask = getTaskById(taskId);
+            const content = document.getElementById('content');
+            showTask(content, updateShowTask)
+            dialog.close();
+
+        } else {
+            console.error('Failed Submitting Form')
+        }
+    })
 })
 

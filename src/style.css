@@ -399,6 +399,7 @@ nav button svg {
 
 .showTaskHeader h2 {
     margin: 1rem;
+    word-break: break-word;
 }
 
 .showTaskHeader svg {

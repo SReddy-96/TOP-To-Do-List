@@ -11,9 +11,11 @@
 
 ## Problems encountered
 - how to update the object.
+- Event listener being called again and again
 
 ## New skills
 - Using `Object.assign` to assign the new object to the existing object in the array. 
+- managing where they event listeners are initially called.
 
 ## Languages
 - HTML

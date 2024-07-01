@@ -17,7 +17,7 @@ export default function TaskPage(content, pageHeading) {
     if (pageHeading === 'Today') {
         pageTasks = TodaysTasks();
     } else {
-        const project = getProjectById();
+        const project = getProjectById(pageHeading);
         pageHeading = project.title;
         pageTasks = GetProjectsTasks(project);
     }

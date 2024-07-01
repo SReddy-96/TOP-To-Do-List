@@ -1,5 +1,6 @@
 import TaskForm from './TaskForm.js';
 import { getTasksProject } from './taskHelpers.js';
+import { getTaskById } from './taskHelpers.js';;
 
 export default function showTask(content, taskObject) {
 
@@ -28,6 +29,7 @@ export default function showTask(content, taskObject) {
     // footer
     editButton.classList.add('success-button', 'editButton', 'form-button')
     editButton.textContent = "Edit"
+    editButton.dataset.id = taskObject.id;
 
     createdDate.textContent = `Created on: ${taskObject.createdDate}`;
     createdDate.classList.add('showTaskCreatedDate');
@@ -74,8 +76,11 @@ export default function showTask(content, taskObject) {
     content.append(wrapper);
 
     editButton.addEventListener('click', function () {
-        const placeholder = '';
-        TaskForm(placeholder, taskObject)
+        const dialog = document.getElementById('taskFormDialog');
+        console.log(this.dataset.id)
+        const taskObject = getTaskById(this.dataset.id)
+        dialog.showModal();
+        TaskForm(taskObject)
     })
 
 }
