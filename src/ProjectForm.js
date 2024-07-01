@@ -1,33 +1,45 @@
 import ProjectsPage from './ProjectsPage.js';
-import {ProjectSelection} from './projectHelpers.js';
+import { ProjectSelection, EditProject, getProjectById } from './projectHelpers.js';
 
 // activate the project form dialog
-export default function ProjectForm(projectClass) {
+export default function ProjectForm(projectObject) {
     // handle open/close of dialog
-    const dialog = document.getElementById('projectFormDialog');
-    const content = document.getElementById('content')
     const projectForm = document.getElementById('projectForm');
-    
-    projectForm.addEventListener('submit', function (e) {
-        e.preventDefault()
-        const projectTitle = document.getElementById('projectTitle').value;
-        const projectDescription = document.getElementById('projectDescription').value;
 
-        new projectClass(projectTitle, projectDescription);
+    const ProjectFormLegend = document.getElementById('ProjectFormLegend');
+    const editProject = document.getElementById('editProjectFormButton');
+    const addProject = document.getElementById('addProjectFormButton');
 
-        //  close dialog
-        dialog.close()
+    // edit task
+    if (projectObject) {
 
-        // empty for next time
-        this.reset()
+        // reset form
+        projectForm.reset();
 
-        // update form selection
-        ProjectSelection()
-        
-        // reload project page
-        ProjectsPage(content)
-        
-    })
+        // toggle buttons   
+        addProject.style.display = "none";
+        editProject.style.display = "block";
 
+        // set legend
+        ProjectFormLegend.textContent = "Edit a Project"
 
+        // fill form
+        const projectTitle = document.getElementById('projectTitle').value = projectObject.title;
+        const projectDescription = document.getElementById('projectDescription').value = projectObject.description;
+        const projectId = document.getElementById('ProjectId').setAttribute('data-current', projectObject.id);
+    }
+
+    // dialog open and close 
+    if (!projectObject) {
+
+        // reset form
+        projectForm.reset();
+
+        // toggle buttons   
+        editProject.style.display = "none";
+        addProject.style.display = "block";
+
+        // set legend
+        ProjectFormLegend.textContent = "Add a Project"
+    };
 }

@@ -1,5 +1,5 @@
 import { createTask, EditTask, getTaskById } from "./taskHelpers.js";
-import { createProject } from "./projectHelpers.js";
+import { createProject,ProjectSelection, EditProject, getProjectById } from "./projectHelpers.js";
 import { format } from "date-fns";
 import TaskForm from "./TaskForm.js";
 import TaskPage from "./TaskPage.js";
@@ -51,7 +51,7 @@ const priorities = ['Urgent', 'Important', 'Low Priority'];
 // run script for mock data
 if (window.localStorage.length === 0) {
     const DefaultProject = new Project('Default Project', 'This is a mock project to add your tasks too')
-    const MockTask = new Task('Mock Task', 'This is a mock Task', 'Important', '2024-06-26', DefaultProject.id, '6')
+    const MockTask = new Task('Search SReddy-96', 'This is a mock Task', 'Important', format(new Date, 'yyyy-MM-dd'), DefaultProject.id, '6')
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -161,5 +161,57 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Failed Submitting Form')
         }
     })
+
+    // handle project form
+    const projectForm = document.getElementById('projectForm');
+    projectForm.addEventListener('submit', function (e) {
+        e.preventDefault()
+
+        const dialog = document.getElementById('projectFormDialog');
+        const action = document.activeElement.value;
+        if (action === 'Add Project') {
+            const projectTitle = document.getElementById('projectTitle').value;
+            const projectDescription = document.getElementById('projectDescription').value;
+
+            new Project(projectTitle, projectDescription);
+
+            //  close dialog
+            dialog.close()
+
+            // empty for next time
+            this.reset()
+
+            // update form selection
+            ProjectSelection()
+
+            // reload project page
+            ProjectsPage(content)
+        }
+
+        else if (action === 'Edit Project') {
+
+            const ProjectTitle = document.getElementById('projectTitle').value;
+            const ProjectDescription = document.getElementById('projectDescription').value;
+            const ProjectId = document.getElementById('ProjectId').dataset.current;
+
+
+            const editedProject = {
+                title: ProjectTitle,
+                description: ProjectDescription,
+            }
+
+            const currentProject = getProjectById(ProjectId)
+
+            EditProject(currentProject, editedProject);
+
+            const content = document.getElementById('content');
+            ProjectsPage(content)
+            dialog.close();
+
+        } else {
+            console.error('Failed Submitting Form')
+        }
+    })
+
 })
 

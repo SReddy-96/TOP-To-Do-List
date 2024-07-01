@@ -1,5 +1,6 @@
 import { completedProjects, GetProjectsTasks } from "./projectHelpers";
 import TaskPage from "./TaskPage.js";
+import ProjectForm from './ProjectForm.js';
 
 export default function ProjectsPage(content) {
 
@@ -11,6 +12,7 @@ export default function ProjectsPage(content) {
     addProjectButton.id = 'showProjectForm';
     addProjectButton.textContent = 'Add Project'
     title.textContent = 'Projects';
+    title.classList.add('ProjectPageTitle')
     content.append(title, addProjectButton);
 
     // update completed projects
@@ -74,7 +76,9 @@ export default function ProjectsPage(content) {
     const showBtn = document.getElementById("showProjectForm");
     showBtn.addEventListener("click", () => {
         // open when function is called
+        ProjectForm()
         dialog.showModal()
+        
     });
 
     const closeBtn = document.getElementById("closeProjectForm");

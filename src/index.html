@@ -91,7 +91,7 @@
     <dialog id="projectFormDialog">
         <form id="projectForm">
 
-            <legend>Add Project</legend>
+            <legend id="ProjectFormLegend"></legend>
 
             <label for="projectTitle">Title</label>
             <input type="text" id="projectTitle" name="projectTitle" required autofocus>
@@ -99,9 +99,14 @@
             <label for="projectDescription">description</label>
             <input type="text" id="projectDescription" name="projectDescription">
 
+            <input type="hidden" id="ProjectId" data-current="">
+
             <div id="projectFormButtons">
                 <button id="closeProjectForm" type="button" class="form-button danger-button">Close</button>
-                <input type="submit" value="Add Project" class="form-button success-button">
+                <input type="submit" value="Add Project" name="action" id="addProjectFormButton"
+                    class="form-button success-button">
+                <input type="submit" value="Edit Project" name="action" id="editProjectFormButton"
+                    class="form-button success-button">
             </div>
         </form>
 

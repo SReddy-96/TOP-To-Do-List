@@ -77,7 +77,6 @@ export default function showTask(content, taskObject) {
 
     editButton.addEventListener('click', function () {
         const dialog = document.getElementById('taskFormDialog');
-        console.log(this.dataset.id)
         const taskObject = getTaskById(this.dataset.id)
         dialog.showModal();
         TaskForm(taskObject)

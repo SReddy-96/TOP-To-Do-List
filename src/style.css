@@ -13,6 +13,8 @@ body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     min-height: auto;
+    font-family: 'Montserrat', system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
 }
 
 img,
@@ -47,6 +49,13 @@ h6 {
 }
 
 /* --- */
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
 
 :root {
     --off-white: hsl(0, 0%, 97%);
@@ -194,8 +203,8 @@ nav {
     justify-content: space-evenly;
     background-color: var(--off-white);
     width: 100%;
-    border-top: 1px solid rgba(33, 35, 38, 0.1);
-    box-shadow: rgba(33, 35, 38, 0.1) 0px -10px 10px -10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px -10px 10px -10px;
 }
 
 nav button {
@@ -247,8 +256,8 @@ nav button svg {
     width: 100%;
     height: 7vh;
     background-color: var(--off-white);
-    border-bottom: 1px solid rgba(33, 35, 38, 0.1);
-    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 10px 3px -8px;
 
 }
 
@@ -266,7 +275,7 @@ nav button svg {
     margin-bottom: 12vh;
     padding: 1rem;
     display: grid;
-    grid-template-rows: repeat(auto-fill, minmax(100px, auto));
+    grid-template-rows: repeat(auto-fill, minmax(60px, auto));
     align-items: center;
     overflow: auto;
     gap: 1rem;
@@ -278,7 +287,7 @@ nav button svg {
     margin-bottom: 12vh;
     padding: 1rem;
     display: grid;
-    grid-template-rows: repeat(auto-fill, minmax(100px, auto));
+    grid-template-rows: repeat(auto-fill, minmax(82px, auto));
     align-items: center;
     overflow: auto;
     gap: 1rem;
@@ -316,6 +325,7 @@ nav button svg {
     grid-template-columns: 1fr 6fr 1fr;
     gap: 5px;
     align-items: center;
+    height: 100%;
 
     /* when deleting */
     opacity: 1;
@@ -445,12 +455,53 @@ nav button svg {
     font-weight: bold;
 }
 
+.ProjectPageTitle {
+    font-size: xx-large;
+}
+
 .projectCompleted {
     display: none;
 }
 
 .taskCounter {
     background: radial-gradient(var(--off-white), var(--light-green));
+}
+
+.pageHeader {
+    display: grid;
+    grid-template-columns: 6fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px;
+    align-items: center;
+}
+
+.pageHeader h2,
+.pageHeaderToday h2 {
+    font-size: xx-large;
+}
+
+.DeleteIconPage,
+.EditIconPage {
+    width: 2rem;
+    height: 2rem;
+
+    fill: var(--dark-green)
+}
+
+.EditIconPage:hover {
+    fill: #76AEED;
+}
+
+.EditIconPage:active {
+    fill: #407FC7;
+}
+
+.DeleteIconPage:hover {
+    fill: hsl(0, 100%, 70%);
+}
+
+.DeleteIconPage:active {
+    fill: hsl(0, 100%, 50%);
 }
 
 /* --- */
@@ -482,4 +533,85 @@ nav button svg {
     dialog {
         width: 50%;
     }
+
+    /* side nav */
+
+    body {
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+        grid-template-rows: 1fr 9fr;
+        min-height: 100vh;
+        gap: 0;
+    }
+
+    #content {
+        min-width: 100%;
+    }
+
+    #header {
+        position: relative;
+        grid-column: 1/-1;
+        text-align: center;
+        height: auto;
+    }
+
+    .TaskContent {
+        padding: 2rem;
+        margin: 0;
+    }
+
+    .ProjectList {
+        padding: 2rem;
+        margin: 0;
+    }
+
+
+    nav {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        background-color: var(--off-white);
+        width: 100%;
+        height: 100vh;
+        border-right: 1px solid rgba(0, 0, 0, 0.15);
+        box-shadow: rgba(0, 0, 0, 0.15) 10px 0px 3px -8px;
+        font-size: x-large;
+    }
+
+
+    nav button svg {
+        width: 40px;
+        height: 40px;
+        fill: var(--dark-green);
+    }
+
+    #showTaskForm {
+        padding: 0.5rem;
+        background-color: var(--dark-green);
+        color: white;
+    }
+
+    #showTaskForm svg {
+        fill: white;
+    }
+
+    .activePage {
+        border-right: 5px solid var(--light-green);
+        border-top: none;
+    }
+
+    .toggleHidden {
+        display: none;
+    }
+
+    .showTask {
+        margin: 0;
+    }
+
+    .showTaskWrapper {
+        width: 50%;
+    }
+
 }

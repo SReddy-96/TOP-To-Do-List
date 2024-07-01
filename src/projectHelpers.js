@@ -1,3 +1,5 @@
+import { DeleteTask } from './taskHelpers.js';
+
 
 function createProject(newProject) {
 
@@ -38,6 +40,10 @@ function GetProjectsTasks(Project) {
         if (Tasks[i].project === Project.id) {
             projectTasks.push(Tasks[i]);
         }
+    }
+
+    if (projectTasks.length === 0){
+        return "No Tasks for this Project"
     }
     return projectTasks; // return an array of tasks.
 }
@@ -125,5 +131,25 @@ function getProjectById(projectId) {
     return 'project does not Exist'
 }
 
+function DeleteAllProjectsTasks(project){
+    const tasks = GetProjectsTasks(project);
 
-export { createProject, DeleteProject, GetProjectsTasks, EditProject, completedProjects, ProjectSelection, getProjectById }
+    if (typeof (tasks) === 'string') {
+        return console.log('No Tasks to Delete')
+    }
+
+    tasks.map((task)=>{
+        DeleteTask(task);
+    })
+
+    const tasksChecker = GetProjectsTasks(project);
+    if (tasksChecker.length === 0) {
+        return console.log('All Tasks deleted');
+    } else{
+    console.error('Error deleting projects Tasks')
+}
+
+}
+
+
+export { createProject, DeleteProject, GetProjectsTasks, EditProject, completedProjects, ProjectSelection, getProjectById, DeleteAllProjectsTasks }
