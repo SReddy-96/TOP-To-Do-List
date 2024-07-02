@@ -5,10 +5,10 @@ The main task here is to create a To-do List app using HTML, CSS, and Javascript
 
 ## Model 
 ### Desktop Demo
-<video controls src="README-Files/desktop.mp4" title="Desktop Video"></video>
+<video controls src="./README-Files/desktop.mp4" title="Desktop Video"></video>
 
 ### Mobile Demo
-<video controls src="README-Files/mobile.mp4" title="Mobile video"></video>
+<video controls src="./README-Files/mobile.mp4" title="Mobile video"></video>
 
 ### Index 
 
