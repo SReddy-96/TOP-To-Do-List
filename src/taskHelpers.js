@@ -1,4 +1,4 @@
-import { isToday, isThisWeek, isBefore } from "date-fns";
+import { isToday, isBefore } from "date-fns";
 
 // create a task
 function createTask(newTask) {
@@ -85,26 +85,6 @@ function TodaysTasks() {
 
 }
 
-// check for the tasks in this week
-function WeeksTasks() {
-    const Tasks = JSON.parse(localStorage.getItem('Tasks'));
-
-    const TasksForTheWeek = [];
-
-    // iterate over and if the date matches todays then add to array
-    for (let i = 0; i < Tasks.length; i++) {
-        if (isThisWeek(Tasks[i].dueDate) === true) {
-            TasksForTheWeek.push(Tasks[i]);
-        }
-    }
-
-    // check if array is empty
-    if (TasksForTheWeek.length === 0) {
-        return "No tasks for This Week"
-    }
-    return TasksForTheWeek;
-}
-
 // get task by id
 function getTaskById(taskId) {
     const Tasks = JSON.parse(localStorage.getItem('Tasks'));
@@ -145,4 +125,4 @@ function toggleCheckedTask() {
 }
 
 
-export { createTask, DeleteTask, EditTask, getTasksProject, TodaysTasks, WeeksTasks, getTaskById, toggleCheckedTask }
+export { createTask, DeleteTask, EditTask, getTasksProject, TodaysTasks, getTaskById, toggleCheckedTask }

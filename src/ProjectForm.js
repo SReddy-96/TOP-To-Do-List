@@ -1,5 +1,3 @@
-import ProjectsPage from './ProjectsPage.js';
-import { ProjectSelection, EditProject, getProjectById } from './projectHelpers.js';
 
 // activate the project form dialog
 export default function ProjectForm(projectObject) {

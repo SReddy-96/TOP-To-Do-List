@@ -1,74 +1,61 @@
 # The Odin Project - To-do List
 
 ## Objective
+The main task here is to create a To-do List app using HTML, CSS, and Javascript, then bundling it all together with Webpack. Using the recently learned skills with Modules, I was able to separate my code, making it more readable and clean. I wanted to focus primarily on a mobile-first approach with this project.
 
 ## Model 
-### Landing Page
-|  Desktop | Mobile   | 
-|----------|----------|
-| ![desktop]()|![mobile]()|
+### Desktop Demo
+<video controls src="README-Files/desktop.mp4" title="Desktop Video"></video>
 
+### Mobile Demo
+<video controls src="README-Files/mobile.mp4" title="Mobile video"></video>
 
-## Problems encountered
-- how to update the object.
-- Event listener being called again and again
+### Index 
 
-## New skills
-- Using `Object.assign` to assign the new object to the existing object in the array. 
-- managing where they event listeners are initially called.
+This project's entry point is `index.js`, which handles the initial DOM load, manages event listeners for the nav components, and processes form submissions. Both Tasks and Projects are handled with class constructors to create objects, which are then added to an array and stored in `localStorage` using `setItem`.
 
-## Languages
+When creating new Projects and Tasks, they are assigned a `crypto.randomUUID()`, which is used to retrieve tasks by matching the ID with the array of objects in local storage. This UUID is also used to connect projects with each task.
+
+The viewing of tasks is used for both the Today page and the Projects Tasks page. The module checks whether the ProjectObject is not empty and gathers the tasks needed to display for either a specific project or the Today page.
+
+The use of `date-fns` was invaluable for tracking and handling dates and times. It was used to set a minimum date for the date input, and when new Tasks or Projects are created, they are given a `createdDate` key to show the user when the item was created. The functions provided by this package were great for collecting tasks based on dates, allowing users to view tasks with a `dueDate` on or before today.
+
+I was also able to use the priority to set a condition that displays a specific color, indicating the severity of the task and making the UI more visual and easier to navigate.
+
+One of my biggest drivers for this project was to keep it primarily mobile-focused, with the nav fixed to the bottom for easy navigation on mobile devices and maintaining a simple, user-friendly UI.
+
+### Project
+
+This page allows users to view their created projects and add more. The projects are laid out similarly to tasks, with the added feature of showing how many uncompleted tasks remain. When all tasks within a project are completed, the empty box changes to a ticked one, indicating project completion.
+
+On this page, each project can be edited or deleted. If a project is deleted, all corresponding tasks are also removed.
+
+### Add and Edit Dialog
+
+Both the project and Task Dialogs are hard-coded into the index.html file. Using `showModal()` and `close()`, they are easily displayed to the user.
+
+The same forms are used for both creating and editing data. By adding two submit buttons to the forms and showing/hiding them as needed, the submissions are handled based on the value inside the submit button to either add or edit the data. This is all managed within the event listener in `index.js`, which checks for the correct conditions before proceeding.
+
+### Show Task
+
+The use of modules made it much easier to keep the code organized and reuse it throughout the application. The show task page is used on both the Today page and inside each project. When users click on a specific Task, they can view all its details, add descriptions, and notes. They can also edit the task and change whatever they please, with only the `createdDate` and `id` remaining constant to keep track of the task.
+
+## Problems Encountered
+- Updating objects
+- Event listeners being called repeatedly
+- Getting the nav to stick to the bottom
+- Handling different form submissions
+- Saving to `localStorage`
+
+## New Skills Acquired
+- Using `Object.assign` to update existing objects in the array
+- Managing where event listeners are initially called
+- Using `position: fixed;` to keep the nav at the bottom of the screen
+- Using the `name` attribute inside submit buttons to create conditions for handling submissions
+- Gaining knowledge of `JSON.stringify`, `JSON.parse`, `.setItem()`, and `getItem()` to handle local Storage data
+
+## Technologies Used
 - HTML
 - CSS
 - JavaScript
 - Webpack
- 
-### Sudo 
-- [x]  use class to create the task, adding title, description, due-date, priority, notes. what project it's on.
-- [x]  use class to create a project then be able to add tasks to said project.
-- [x] class method to get module that gets all the tasks inside that project.
-- [x] default project should be shown if its the first time on the app.have title and description
-- [ ] separate logic from DOM manipulation
-- [x] creating task 
-- [x] deleting task
-- [x] changing priority - use class method editTask and just assign an array with priority.
-- [x] setting task a complete. using editTask method
-- [x] editing task (use icons to show this)
-- [x] setting task to project, use all projects and use a selection form to choose then match the id's 
-- [x] creating project, 
-- [x] editing project
-- [x] due date on project, function to get 
-- [x] completed project, use getProjectTasks to check all completed is true then show all tasks are completed
-- [x] deleting project. 
-- [ ] handle if the task in not in local storage.
-- [ ] make sure to `stringify` when sending json data to local storage.
-
-UI
-- [x] view all projects
-- [ ] view all tasks in project, just title and due-date. 
-- [x] check box to click but use an icon, change when clicked which inturn changes the bool. , line through the task, setting a class to a task
-- [x] expand a single task to edit and delete
-- [x] if the date is todays date it goes into a `Today` page, show title, which project, description, no due date as its today.
-- [x] if all task are complete ticked icon
-- [x] for priority, change the right hand side border color
-- [x] go mobile first.
-- [x] add a low nav bar to mobile with today, projects, add, option for project or task.
-- [ ] on desktop, side bar with today, next 7 days, add task, add project. then projects titles are shown underneath. 
-- [x] have a number on the side of the project to show how many tasks need doing.
-- [x] display a message when there is not tasks
-- [x] show form with a dialog modal, both task and project
-- [x] use ${} to add the right priority to show the color
-
-error! with event handling the add project form !!!!!
-
-priority
-- Urgent (red)
-- Important (yellow/orange)
-- Low Priority.(blue)
-
-have a boolean if done true or false
-
-delete = Storage.removeItem('object variable')
-create = take input add to object then JSON.stringify('object') then localStorage.setItem('object variable', the user user input)
-update = be the same as create
-read = localStorage.getItem('object variable') then JSON.parse('variable')

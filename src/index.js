@@ -46,20 +46,22 @@ class Project {
     }
 }
 
-const priorities = ['Urgent', 'Important', 'Low Priority'];
-
 // run script for mock data
 if (window.localStorage.length === 0) {
     const DefaultProject = new Project('Default Project', 'This is a mock project to add your tasks too')
-    const MockTask = new Task('Search SReddy-96', 'This is a mock Task', 'Important', format(new Date, 'yyyy-MM-dd'), DefaultProject.id, '6')
+    const MockTask = new Task('Search SReddy-96 on Github', 'https://github.com/SReddy-96', 'Urgent', format(new Date, 'yyyy-MM-dd'), DefaultProject.id, 'Notes');
+    const MockTask1 = new Task("Check out Steven's Portfolio", 'https://steven-reddy.netlify.app/', 'Important', format(new Date, 'yyyy-MM-dd'), DefaultProject.id, 'Notes')
+    const MockTask2 = new Task("Connect with Steven on LinkedIn", 'https://www.linkedin.com/in/steven-reddy-912b0b299/', 'Urgent', format(new Date, 'yyyy-MM-dd'), DefaultProject.id, 'Notes')
+    const MockTask3 = new Task("Follow Steven on X", 'https://x.com/SReddy_96', 'LowPriority', format(new Date, 'yyyy-MM-dd'), DefaultProject.id, 'Notes')
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
     const content = document.getElementById('content');
-
     const todayButton = document.getElementById('today');
     const projectButton = document.getElementById('project');
 
+    // first load of app
     TaskPage(content, 'Today');
     todayButton.classList.add('activePage')
     content.className = 'TaskContent'
@@ -101,8 +103,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    const taskForm = document.getElementById('taskForm');
+
     // set the event listeners for the task form
+    const taskForm = document.getElementById('taskForm');
     taskForm.addEventListener('submit', function (e) {
         e.preventDefault()
 
